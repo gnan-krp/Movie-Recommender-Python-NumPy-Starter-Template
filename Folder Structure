@@ -1,0 +1,15 @@
+Movie-Recommender/
+│
+├─ data/
+│   └─ movies.py       
+│   └─ ratings.py       
+│
+├─ src/
+│   ├─ __init__.py
+│   ├─ data_loader.py
+│   ├─ user_item_matrix.py
+│   ├─ collaborative_filtering.py
+│   ├─ ascii_visuals.py
+│
+├─ main.py
+└─ README.md
