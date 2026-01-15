@@ -7,8 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v3
@@ -16,51 +15,15 @@ jobs:
           python-version: 3.10
           auto-update-conda: true
 
-name: Python Package using Conda
+      - name: Install dependencies
+        run: conda install -y python=3.10 numpy matplotlib pytest flake8
 
-on: [push]
+      - name: Lint code
+        run: conda run -n base flake8 . --exit-zero
 
-jobs:
-  build-linux:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Miniconda
-        uses: conda-incubator/setup-miniconda@v3
-        with:
-          python-version: 3.10
-          auto-update-conda: true
-
-name: Python Package using Conda
-
-on: [push]
-
-jobs:
-  build-linux:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Miniconda
-        uses: conda-incubator/setup-miniconda@v3
-        with:
-          python-version: 3.10
-          auto-update-conda: true
-      - name: Create environment and run checks
-        run: |
-          # Create a fresh environment
-          conda create -n ci-env python=3.10 numpy matplotlib pytest flake8 -y
-
-          # Lint the code
-          conda run -n ci-env flake8 . --exit-zero
-
-          # Run tests (temporary placeholder if you have no tests yet)
-          conda run -n ci-env pytest || echo "No tests yet"
+      - name: Run tests
+        run: conda run -n base pytest || echo "No tests yet"
+ 
 
 
 
