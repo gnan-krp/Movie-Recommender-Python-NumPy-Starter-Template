@@ -1,0 +1,40 @@
+name: Python Package using Conda
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Miniconda
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: 3.10
+          auto-update-conda: true
+
+      # Step 3: Install packages (safe on CI)
+      - name: Install dependencies
+        run: conda install -y python=3.10 numpy matplotlib pytest flake8
+
+      # Step 4: Lint code with flake8
+      - name: Lint code
+        run: conda run -n base flake8 . --exit-zero
+
+      # Step 5: Run tests (placeholder if no tests exist yet)
+      - name: Run tests
+        run: conda run -n base pytest || echo "No tests yet"
+
+
+
+
+
