@@ -1,3 +1,5 @@
+![Python Package CI](https://github.com/gnan-krp/Movie-Recommender-Python-NumPy-Starter-Template/actions/workflows/python-pip.yml/badge.svg)
+
 # Movie Recommendation System (Python + NumPy)
 
 This project implements a **Movie Recommendation System** using only **Python + NumPy**.  
